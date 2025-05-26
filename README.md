@@ -23,13 +23,13 @@ Bagaimana cara merekomendasikan film kepada pengguna berdasarkan film yang sebel
 
 Membangun sebuah sistem rekomendasi yang mampu memberikan saran film secara akurat berdasarkan rating dan riwayat tontonan pengguna di masa lalu.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
+### Solution statements
+Untuk mencapai tujuan tersebut, digunakan dua pendekatan utama:
 
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+- Content-Based Filtering : Menggunakan metadata film (judul, genre) untuk menghitung kesamaan antar film dengan TF-IDF dan cosine similarity.
+- Collaborative Filtering : Menggunakan model Neural Network berbasis TensorFlow/Keras untuk mempelajari pola rating pengguna dan memberikan prediksi rating film.
 
-## Data Understanding
+### Data Understanding
 **Dataset**
 Dataset yang digunakan berasal dari MovieLens (ml-latest-small) , tersedia melalui Kaggle: https://www.kaggle.com/rohan4050/movie-recommendation-data
 
