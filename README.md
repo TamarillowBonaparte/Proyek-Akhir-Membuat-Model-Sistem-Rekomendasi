@@ -13,9 +13,14 @@ Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
+Sistem rekomendasi merupakan salah satu aplikasi machine learning yang paling umum digunakan dalam industri digital, terutama di platform streaming film seperti Netflix, IMDb, dan lainnya. Tujuan dari sistem ini adalah memberikan saran konten (film) kepada pengguna berdasarkan preferensi mereka, baik berdasarkan riwayat tontonan maupun perilaku pengguna lain.
 
-Bagian laporan ini mencakup:
+Dalam proyek ini, dibangun dua jenis pendekatan sistem rekomendasi:
+
+- Content-Based Filtering , yang merekomendasikan film berdasarkan kesamaan genre dan deskripsi.
+- Collaborative Filtering , yang menggunakan data rating pengguna secara kolektif untuk menemukan pola kesukaan.
+
+Masalah ini penting diselesaikan karena sistem rekomendasi meningkatkan keterlibatan pengguna, membantu menemukan konten baru yang relevan, dan pada akhirnya meningkatkan kepuasan dan retensi pengguna
 
 ### Problem Statements
 
@@ -32,14 +37,23 @@ Membangun sebuah sistem rekomendasi yang mampu memberikan saran film secara akur
     - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+🔍 Dataset
+Dataset yang digunakan berasal dari MovieLens (ml-latest-small) , tersedia melalui Kaggle:
+https://www.kaggle.com/rohan4050/movie-recommendation-data
 
-Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Dataset terdiri dari 4 file CSV:
 
-Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+movies.csv: Informasi film (movieId, title, genres)
+ratings.csv: Rating pengguna (userId, movieId, rating)
+tags.csv: Tags tambahan untuk film
+links.csv: Tautan eksternal ke IMDb dan TMDB
+📊 EDA Singkat
+Total film: ±9.000+
+Total pengguna: ±600+
+Total rating: ±100.000+
+Distribusi rating dominan pada skala 3–5
+Genre populer: Drama, Comedy, Thriller
+Jumlah film per tahun meningkat pesat setelah 1990-an
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data beserta insight atau exploratory data analysis.
