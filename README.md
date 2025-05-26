@@ -1,6 +1,5 @@
-# Proyek-Akhir-Membuat-Model-Sistem-Rekomendasi
 # Laporan Proyek Machine Learning - Moch Dani Kurniawan Sugiarto
-
+**Proyek-Akhir-Membuat-Model-Sistem-Rekomendasi**
 ## Project Overview
 
 Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
@@ -31,21 +30,17 @@ Membangun sebuah sistem rekomendasi yang mampu memberikan saran film secara akur
     - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
 
 ## Data Understanding
-🔍 Dataset
-Dataset yang digunakan berasal dari MovieLens (ml-latest-small) , tersedia melalui Kaggle:
-https://www.kaggle.com/rohan4050/movie-recommendation-data
+**Dataset**
+Dataset yang digunakan berasal dari MovieLens (ml-latest-small) , tersedia melalui Kaggle: https://www.kaggle.com/rohan4050/movie-recommendation-data
 
 Dataset terdiri dari 4 file CSV:
 
-movies.csv: Informasi film (movieId, title, genres)
+- movies.csv: Informasi film (movieId, title, genres)
+- ratings.csv: Rating pengguna (userId, movieId, rating)
+- tags.csv: Tags tambahan untuk film
+- links.csv: Tautan eksternal ke IMDb dan TMDB
 
-ratings.csv: Rating pengguna (userId, movieId, rating)
-
-tags.csv: Tags tambahan untuk film
-
-links.csv: Tautan eksternal ke IMDb dan TMDB
-
-📊 EDA Singkat
+**EDA**
 
 Total film: ±9.000+
 
@@ -65,28 +60,68 @@ Visualisasi distribusi rating, jumlah film per genre, jumlah rating per user, da
 
 ## Data Preparation
 **Tahapan Preprocessing**
-Penggabungan Dataset
+1. Penggabungan Dataset
+
 Gabung tabel ratings dengan movies untuk mendapatkan informasi judul dan genre.
-Penanganan Missing Value
+
+2. Penanganan Missing Value
+
 Hapus baris duplikat dan nilai kosong pada kolom movieId.
-Encoding ID Pengguna dan Film
+
+3. Encoding ID Pengguna dan Film
+
 Mapping userId dan movieId menjadi indeks numerik untuk model Collaborative Filtering.
-Normalisasi Rating
+
+4. Normalisasi Rating
+
 Normalisasi nilai rating dari 0 hingga 1 untuk pelatihan model neural network.
-🤔 Alasan
-Preprocessing diperlukan agar data siap digunakan dalam model machine learning, termasuk encoding ID, normalisasi fitur, dan penyesuaian format input.
+
+Alasan : Preprocessing diperlukan agar data siap digunakan dalam model machine learning, termasuk encoding ID, normalisasi fitur, dan penyesuaian format input.
 
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
+1. Content-Based Filtering
+Model ini menggunakan TF-IDF Vectorizer untuk mengubah genre film menjadi vektor numerik, lalu menghitung cosine similarity untuk menemukan film dengan genre mirip.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+🎯 Recommendations for 'Toy Story (1995)':
+   • Toy Story 2 (1999) - Animation|Children|Comedy
+     Similarity: 0.333
+   • Finding Nemo (2003) - Animation|Children|Comedy|Adventure
+     Similarity: 0.298
+
+2. Collaborative Filtering (Neural Network)
+Model ini menggunakan arsitektur Neural Collaborative Filtering (NCF), dengan embedding layer untuk user dan film, serta dot product untuk menghitung interaksi. Model dilatih dengan optimisasi Adam dan loss binary crossentropy.
+
+Arsitektur:
+Input: userId, movieId
+Embedding: 50 dimensi
+Output: Prediksi rating (0–5)
+
+🎯 Top 5 Recommendations for User 143:
+   • The Godfather (1972) - Drama
+     Predicted Rating: 4.92
+   • Pulp Fiction (1994) - Crime|Drama
+     Predicted Rating: 4.87
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
+Model Collaborative Filtering dievaluasi menggunakan:
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+MAE (Mean Absolute Error) : Rata-rata kesalahan absolut antara prediksi dan nilai sebenarnya.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+MSE (Mean Squared Error) : Rata-rata kuadrat kesalahan, lebih sensitif terhadap error besar.
+
+Hasil Evaluasi
+- Final Training MAE: ~0.12
+- Final Validation MAE: ~0.15
+- Final Training MSE: ~0.027
+- Final Validation MSE: ~0.036
+
+Grafik evaluasi selama epoch menunjukkan bahwa model tidak overfitting dan memiliki performa yang stabil.
+
+## Perbandingan Pendekatan Content-Based dan Collaborative Filtering
+
+| Aspek               | Content-Based Filtering | Collaborative Filtering |
+|---------------------|--------------------------|--------------------------|
+| **Data Requirement**| Metadata film            | Riwayat rating pengguna  |
+| **Cold Start**      | Baik                     | Buruk                    |
+| **Scalability**     | Tinggi                   | Menengah                 |
+| **Diversity**       | Rendah                   | Tinggi                   |
