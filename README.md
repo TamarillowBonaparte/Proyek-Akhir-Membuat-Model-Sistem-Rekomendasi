@@ -110,10 +110,10 @@ MAE (Mean Absolute Error) : Rata-rata kesalahan absolut antara prediksi dan nila
 MSE (Mean Squared Error) : Rata-rata kuadrat kesalahan, lebih sensitif terhadap error besar.
 
 Hasil Evaluasi
-- Final Training MAE: ~0.12
-- Final Validation MAE: ~0.15
-- Final Training MSE: ~0.027
-- Final Validation MSE: ~0.036
+- Final Training MAE: ~0.0457
+- Final Validation MAE: ~0.1611
+- Final Training MSE: ~0.0042
+- Final Validation MSE: ~0.0443
 
 Grafik evaluasi selama epoch menunjukkan bahwa model tidak overfitting dan memiliki performa yang stabil.
 
@@ -121,7 +121,8 @@ Grafik evaluasi selama epoch menunjukkan bahwa model tidak overfitting dan memil
 
 | Aspek               | Content-Based Filtering | Collaborative Filtering |
 |---------------------|--------------------------|--------------------------|
-| **Data Requirement**| Metadata film            | Riwayat rating pengguna  |
-| **Cold Start**      | Baik                     | Buruk                    |
-| **Scalability**     | Tinggi                   | Menengah                 |
-| **Diversity**       | Rendah                   | Tinggi                   |
+| **Data Requirement**| Movie metadata| User ratings |
+| **Cold Start**      |No problem                  | Problematic           |
+| **Scalability**     | High                   | Medium                 |
+| **Diversity**       | Low                   | High                   |
+| **Interpretability**       | High                   | Low                   |
