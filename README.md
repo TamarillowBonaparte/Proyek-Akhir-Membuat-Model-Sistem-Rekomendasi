@@ -204,26 +204,38 @@ Visualisasi distribusi rating, jumlah film per genre, jumlah rating per user, da
 ## Data Preparation
 **Tahapan Preprocessing**
 1. Penggabungan Dataset
+   
+Tabel ratings digabung dengan movies untuk mendapatkan informasi judul dan genre dari setiap film yang dirating oleh pengguna. Langkah ini penting untuk menghubungkan data rating dengan metadata film.
 
-Gabung tabel ratings dengan movies untuk mendapatkan informasi judul dan genre.
+2. Pemeriksaan dan Penanganan Missing Value & Duplikasi
+   
+Sebelum digunakan, dataset diperiksa untuk memastikan tidak ada nilai kosong atau duplikasi. Hasil analisis menunjukkan tidak ditemukan missing value maupun duplikasi pada kolom penting seperti movieId, userId, dan rating.
 
-2. Penanganan Missing Value
+3. TF-IDF Vectorization untuk Genre (Content-Based Filtering)
+   
+Untuk model Content-Based Filtering, fitur genres diubah menjadi vektor numerik menggunakan teknik TF-IDF Vectorization. Teknik ini mengukur seberapa penting kata (genre) dalam keseluruhan koleksi film dan digunakan untuk menghitung kesamaan antar film menggunakan cosine similarity.
 
-Hapus baris duplikat dan nilai kosong pada kolom movieId.
+4. Encoding ID Pengguna dan Film (Collaborative Filtering)
+   
+Kolom userId dan movieId diubah menjadi indeks numerik agar dapat digunakan dalam model neural network berbasis embedding. Mapping ini memungkinkan pembuatan representasi vektor unik untuk setiap pengguna dan film.
 
-3. Encoding ID Pengguna dan Film
+5. Normalisasi Rating
+   
+Nilai rating yang awalnya berada pada skala 0.5 hingga 5.0 dinormalisasi ke rentang 0 hingga 1. Hal ini bertujuan untuk menyesuaikan skala input terhadap fungsi aktivasi sigmoid pada output model Collaborative Filtering.
 
-Mapping userId dan movieId menjadi indeks numerik untuk model Collaborative Filtering.
+6. Pemisahan Data: Train/Test Split
+   
+Dataset dibagi menjadi data latih (80%) dan data uji (20%) secara acak. Ini merupakan langkah penting untuk memastikan bahwa model Collaborative Filtering dapat dievaluasi dengan baik pada data yang tidak pernah dilihat sebelumnya.
 
-4. Normalisasi Rating
 
-Normalisasi nilai rating dari 0 hingga 1 untuk pelatihan model neural network.
 
 Alasan : Preprocessing diperlukan agar data siap digunakan dalam model machine learning, termasuk encoding ID, normalisasi fitur, dan penyesuaian format input.
 
 ## Modeling
 1. Content-Based Filtering
-Model ini menggunakan TF-IDF Vectorizer untuk mengubah genre film menjadi vektor numerik, lalu menghitung cosine similarity untuk menemukan film dengan genre mirip.
+Setelah data genre film diubah menjadi representasi vektor numerik menggunakan TF-IDF Vectorizer (lihat bagian Data Preparation), dilakukan perhitungan cosine similarity antar film.
+
+- Metode Cosine Similarity digunakan untuk mengukur seberapa mirip dua film berdasarkan vektor genre-nya.
 
 🎯 Recommendations for 'Toy Story (1995)':
    • Toy Story 2 (1999) - Animation|Children|Comedy
