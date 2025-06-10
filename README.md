@@ -8,7 +8,7 @@ Proyek ini bertujuan untuk membangun sistem rekomendasi film dengan dua pendekat
 
 Pengembangan sistem ini tidak hanya memberikan pengalaman personalisasi yang lebih baik bagi pengguna, tetapi juga dapat meningkatkan durasi keterlibatan pengguna (user engagement) dan kepuasan pelanggan di platform layanan streaming. Selain itu, sistem rekomendasi memiliki nilai komersial yang tinggi karena dapat digunakan oleh industri hiburan untuk menyajikan konten yang lebih tepat sasaran.
 
-Dengan memanfaatkan dataset MovieLens, proyek ini juga menjadi media pembelajaran untuk mengimplementasikan teknik pemrosesan data, machine learning, dan evaluasi model secara praktis dalam konteks dunia nyata.
+Dengan memanfaatkan Movie Recommender Dataset, proyek ini juga menjadi media pembelajaran untuk mengimplementasikan teknik pemrosesan data, machine learning, dan evaluasi model secara praktis dalam konteks dunia nyata.
 
 ## Business Understanding
 
