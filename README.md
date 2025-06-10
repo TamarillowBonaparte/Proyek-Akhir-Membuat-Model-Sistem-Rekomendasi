@@ -237,11 +237,16 @@ Setelah data genre film diubah menjadi representasi vektor numerik menggunakan T
 
 - Metode Cosine Similarity digunakan untuk mengukur seberapa mirip dua film berdasarkan vektor genre-nya.
 
-🎯 Recommendations for 'Toy Story (1995)':
-   • Toy Story 2 (1999) - Animation|Children|Comedy
-     Similarity: 0.333
-   • Finding Nemo (2003) - Animation|Children|Comedy|Adventure
-     Similarity: 0.298
+Recommendations for 'Toy Story (1995)':
+   • Antz (1998)
+     Genre: Adventure|Animation|Children|Comedy|Fantasy
+     Similarity: 1.000
+   • Toy Story 2 (1999)
+     Genre: Adventure|Animation|Children|Comedy|Fantasy
+     Similarity: 1.000
+   • Adventures of Rocky and Bullwinkle, The (2000)
+     Genre: Adventure|Animation|Children|Comedy|Fantasy
+     Similarity: 1.000
 
 2. Collaborative Filtering (Neural Network)
 Model ini menggunakan arsitektur Neural Collaborative Filtering (NCF), dengan embedding layer untuk user dan film, serta dot product untuk menghitung interaksi. Model dilatih dengan optimisasi Adam dan loss binary crossentropy.
@@ -251,11 +256,14 @@ Input: userId, movieId
 Embedding: 50 dimensi
 Output: Prediksi rating (0–5)
 
-🎯 Top 5 Recommendations for User 143:
-   • The Godfather (1972) - Drama
-     Predicted Rating: 4.92
-   • Pulp Fiction (1994) - Crime|Drama
-     Predicted Rating: 4.87
+👤 Sample User: 448
+🌟 User's Top Rated Movies:
+   • Toy Story (1995) - Rating: 5.0
+     Genre: Adventure|Animation|Children|Comedy|Fantasy
+   • Casino (1995) - Rating: 5.0
+     Genre: Crime|Drama
+   • Star Wars: Episode IV - A New Hope (1977) - Rating: 5.0
+     Genre: Action|Adventure|Sci-Fi
 
 ## Evaluation
 Model Collaborative Filtering dievaluasi menggunakan:
