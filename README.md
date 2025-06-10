@@ -2,7 +2,13 @@
 **Proyek-Akhir-Membuat-Model-Sistem-Rekomendasi**
 ## Project Overview
 
-Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Di era digital saat ini, jumlah konten film yang tersedia secara daring semakin melimpah. Platform streaming seperti Netflix, Disney+, dan layanan lokal menghadirkan ribuan judul film dari berbagai genre dan negara. Situasi ini membuat pengguna sering merasa kebingungan dalam memilih film yang sesuai dengan minat dan preferensi mereka. Di sinilah sistem rekomendasi memiliki peran penting — membantu pengguna menemukan film yang relevan dan menarik tanpa harus mencarinya secara manual.
+
+Proyek ini bertujuan untuk membangun sistem rekomendasi film dengan dua pendekatan utama: Content-Based Filtering dan Collaborative Filtering. Content-Based Filtering menggunakan informasi dari konten film seperti genre dan sinopsis, sedangkan Collaborative Filtering memanfaatkan data interaksi pengguna seperti rating dan pola preferensi untuk mempelajari kesamaan antar pengguna atau antar item.
+
+Pengembangan sistem ini tidak hanya memberikan pengalaman personalisasi yang lebih baik bagi pengguna, tetapi juga dapat meningkatkan durasi keterlibatan pengguna (user engagement) dan kepuasan pelanggan di platform layanan streaming. Selain itu, sistem rekomendasi memiliki nilai komersial yang tinggi karena dapat digunakan oleh industri hiburan untuk menyajikan konten yang lebih tepat sasaran.
+
+Dengan memanfaatkan dataset MovieLens, proyek ini juga menjadi media pembelajaran untuk mengimplementasikan teknik pemrosesan data, machine learning, dan evaluasi model secara praktis dalam konteks dunia nyata.
 
 ## Business Understanding
 
