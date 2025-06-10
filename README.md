@@ -39,12 +39,149 @@ Untuk mencapai tujuan tersebut, digunakan dua pendekatan utama:
 **Dataset**
 Dataset yang digunakan berasal dari MovieLens (ml-latest-small) , tersedia melalui Kaggle: https://www.kaggle.com/rohan4050/movie-recommendation-data
 
-Dataset terdiri dari 4 file CSV:
+**Struktur Dataset**
+Dataset terdiri dari 4 file CSV utama:
 
-- movies.csv: Informasi film (movieId, title, genres)
-- ratings.csv: Rating pengguna (userId, movieId, rating)
-- tags.csv: Tags tambahan untuk film
-- links.csv: Tautan eksternal ke IMDb dan TMDB
+movies.csv: Informasi film (movieId, title, genres)
+ratings.csv: Rating pengguna (userId, movieId, rating, timestamp)
+tags.csv: Tags tambahan untuk film (userId, movieId, tag, timestamp)
+links.csv: Tautan eksternal ke IMDb dan TMDB (movieId, imdbId, tmdbId)
+
+**Analisis Dimensi Dataset**
+- File movies.csv:
+
+Jumlah baris: 9,742 film
+Jumlah kolom: 3 kolom
+Ukuran: ~500KB
+
+- File ratings.csv:
+
+Jumlah baris: 100,836 rating
+Jumlah kolom: 4 kolom
+Ukuran: ~2.5MB
+
+- File tags.csv:
+
+Jumlah baris: 3,683 tag
+Jumlah kolom: 4 kolom
+Ukuran: ~288KB
+
+- File links.csv:
+
+Jumlah baris: 9,742 link
+Jumlah kolom: 3 kolom
+Ukuran: ~191KB
+
+**Deskripsi Fitur**
+- movies.csv
+
+movieId: ID unik untuk setiap film (integer)
+title: Judul film beserta tahun rilis dalam format "Title (Year)" (string)
+genres: Genre film dipisahkan dengan "|" (string)
+
+- ratings.csv
+
+userId: ID unik untuk setiap pengguna (integer)
+movieId: ID film yang sama dengan movies.csv (integer)
+rating: Rating yang diberikan pengguna, skala 0.5-5.0 dengan increment 0.5 (float)
+timestamp: Waktu pemberian rating dalam format Unix timestamp (integer)
+
+- tags.csv
+
+userId: ID pengguna yang memberikan tag (integer)
+movieId: ID film yang diberi tag (integer)
+tag: Tag/label yang diberikan pengguna (string)
+timestamp: Waktu pemberian tag dalam format Unix timestamp (integer)
+
+- links.csv
+
+movieId: ID film (integer)
+imdbId: ID film di IMDb (integer)
+tmdbId: ID film di The Movie Database (integer)
+
+Kondisi Data Awal (Sebelum Preprocessing) Berdasarkan analisis pada code, berikut kondisi data mentah sebelum dilakukan preprocessing:
+**Missing Values Analysis**
+- Dataset movies.csv:
+
+movieId: 0 missing values (100% complete)
+title: 0 missing values (100% complete)
+genres: 0 missing values (100% complete)
+
+- Dataset ratings.csv:
+
+userId: 0 missing values (100% complete)
+movieId: 0 missing values (100% complete)
+rating: 0 missing values (100% complete)
+timestamp: 0 missing values (100% complete)
+
+- Dataset tags.csv:
+
+userId: 0 missing values (100% complete)
+movieId: 0 missing values (100% complete)
+tag: 0 missing values (100% complete)
+timestamp: 0 missing values (100% complete)
+
+- Dataset links.csv:
+
+movieId: 0 missing values (100% complete)
+imdbId: 0 missing values (100% complete)
+tmdbId: Terdapat beberapa missing values untuk film yang tidak ada di TMDB
+
+**Data Duplikat Analysis**
+- Dataset movies.csv:
+
+Total duplikat berdasarkan movieId: 0 baris
+Dataset sudah bersih dari duplikasi film
+
+- Dataset ratings.csv:
+
+Total duplikat berdasarkan kombinasi (userId, movieId): 0 baris
+Setiap pengguna hanya memberikan satu rating per film
+
+- Dataset tags.csv:
+
+Terdapat kemungkinan duplikat tag untuk film yang sama oleh pengguna yang sama
+Tag duplikat tidak menjadi masalah karena menunjukkan konsistensi labeling
+
+**Statistical Summary**
+- Distribusi Rating (ratings.csv)
+
+Total pengguna unik: 610 pengguna
+Total film unik: 9,724 film (dari 9,742 film tersedia)
+Total rating: 100,836 rating
+Rata-rata rating per pengguna: ~165 rating
+Range rating: 0.5 - 5.0
+Rata-rata rating keseluruhan: ~3.5
+Distribusi rating: Mayoritas pengguna memberikan rating 3-5, dengan rating 4.0 paling populer
+
+- Distribusi Genre
+
+Total genre unik: 20 genre utama
+Genre terpopuler: Drama (4,361 film), Comedy (3,756 film), Thriller (1,894 film)
+Kombinasi genre: Sebagian besar film memiliki 2-3 genre
+Film tanpa genre: Beberapa film memiliki label "(no genres listed)"
+
+- Distribusi Temporal
+
+Range tahun film: 1902 - 2018
+Periode paling produktif: 1990-2010 (ledakan industri Hollywood)
+Film terbaru: Hingga tahun 2018
+Rating timestamp: Data rating dikumpulkan antara 1996-2018
+
+**Data Quality Assessment**
+- Kualitas Data Tinggi:
+
+Tidak ada missing values pada kolom kritis (movieId, userId, rating)
+Konsistensi format data across files
+ID linking antar tabel berfungsi dengan baik
+Range nilai rating valid (0.5-5.0)
+
+- Potensi Masalah:
+
+Sparsity: Hanya ~1.7% dari kemungkinan kombinasi user-movie memiliki rating
+Cold start: Beberapa film memiliki rating sangat sedikit
+Data imbalance: Distribusi rating condong ke nilai tinggi (3-5)
+Genre encoding: Beberapa film memiliki banyak genre yang dapat mempersulit modeling
 
 **EDA**
 
