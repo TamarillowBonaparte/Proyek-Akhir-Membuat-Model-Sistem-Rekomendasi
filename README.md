@@ -266,19 +266,52 @@ Output: Prediksi rating (0–5)
      Genre: Action|Adventure|Sci-Fi
 
 ## Evaluation
-Model Collaborative Filtering dievaluasi menggunakan:
+Model sistem rekomendasi dievaluasi berdasarkan pendekatan yang digunakan:
 
-MAE (Mean Absolute Error) : Rata-rata kesalahan absolut antara prediksi dan nilai sebenarnya.
+---
 
-MSE (Mean Squared Error) : Rata-rata kuadrat kesalahan, lebih sensitif terhadap error besar.
+### 🔹 1. Content-Based Filtering
 
-Hasil Evaluasi
-- Final Training MAE: ~0.0457
-- Final Validation MAE: ~0.1611
-- Final Training MSE: ~0.0042
-- Final Validation MSE: ~0.0443
+Model ini memberikan rekomendasi berdasarkan kesamaan konten (genre), bukan memprediksi rating. Oleh karena itu, metrik evaluasi numerik seperti MAE atau MSE tidak relevan.
 
-Grafik evaluasi selama epoch menunjukkan bahwa model tidak overfitting dan memiliki performa yang stabil.
+Sebagai gantinya, evaluasi dilakukan menggunakan pendekatan berbasis ranking, yaitu:
+
+- **Precision@K**: Mengukur proporsi item relevan di antara K rekomendasi teratas.
+- **Recall@K**: Mengukur seberapa banyak item relevan yang berhasil direkomendasikan dari total item relevan.
+
+> **Catatan**: Karena tidak ada ground truth eksplisit dalam dataset MovieLens untuk relevansi top-N, evaluasi dilakukan secara manual. Misalnya, untuk film *Toy Story (1995)*, model merekomendasikan film animasi anak-anak lain seperti:
+>
+> 1. **Antz (1998)**  
+> 2. **Toy Story 2 (1999)**  
+> 3. **Adventures of Rocky and Bullwinkle, The (2000)**
+
+Rekomendasi ini dianggap relevan berdasarkan genre dan konteks.
+
+---
+
+### 🔹 2. Collaborative Filtering (Neural Network)
+
+Model ini memprediksi rating pengguna terhadap film menggunakan pendekatan Neural Collaborative Filtering.
+
+#### Metrik yang digunakan:
+- **MAE (Mean Absolute Error)**: Rata-rata kesalahan absolut antara prediksi dan nilai asli.
+- **MSE (Mean Squared Error)**: Rata-rata kuadrat dari kesalahan, memberikan penalti lebih besar pada kesalahan besar.
+
+#### 📈 Hasil Evaluasi (Sesuai Notebook):
+
+| Metrik       | Training Set | Validation Set |
+|--------------|--------------|----------------|
+| MAE          | **0.0416**   | **0.1650**     |
+| MSE          | **0.0035**   | **0.0461**     |
+
+Model menunjukkan performa yang baik dan **tidak mengalami overfitting**, sebagaimana terlihat pada grafik evaluasi per epoch. MAE dan MSE pada data validasi masih berada dalam batas yang wajar.
+
+---
+
+**Kesimpulan:**
+- Content-Based Filtering efektif untuk memberikan rekomendasi film sejenis berdasarkan genre.
+- Collaborative Filtering unggul dalam memahami pola rating antar pengguna dan film, serta menunjukkan performa prediktif yang stabil.
+
 
 ## Perbandingan Pendekatan Content-Based dan Collaborative Filtering
 
