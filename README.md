@@ -238,14 +238,23 @@ Setelah data genre film diubah menjadi representasi vektor numerik menggunakan T
 - Metode Cosine Similarity digunakan untuk mengukur seberapa mirip dua film berdasarkan vektor genre-nya.
 
 Recommendations for 'Toy Story (1995)':
-   • Antz (1998)
+
+- Antz (1998)
+   
      Genre: Adventure|Animation|Children|Comedy|Fantasy
+    
      Similarity: 1.000
-   • Toy Story 2 (1999)
+   
+- Toy Story 2 (1999)
+     
      Genre: Adventure|Animation|Children|Comedy|Fantasy
+     
      Similarity: 1.000
-   • Adventures of Rocky and Bullwinkle, The (2000)
+
+- Adventures of Rocky and Bullwinkle, The (2000)
+
      Genre: Adventure|Animation|Children|Comedy|Fantasy
+
      Similarity: 1.000
 
 2. Collaborative Filtering (Neural Network)
@@ -258,12 +267,18 @@ Output: Prediksi rating (0–5)
 
 👤 Sample User: 234
 🌟 User's Top Rated Movies:
-   • Toy Story (1995) - Rating: 5.0
-     Genre: Adventure|Animation|Children|Comedy|Fantasy
-   • Powder (1995) - Rating: 5.0
-     Genre: Drama|Sci-Fi
-   • Pocahontas (1995) - Rating: 5.0
-     Genre: Animation|Children|Drama|Musical|Romance
+
+- Toy Story (1995) - Rating: 5.0
+
+  Genre: Adventure|Animation|Children|Comedy|Fantasy
+
+- Powder (1995) - Rating: 5.0
+
+  Genre: Drama|Sci-Fi
+
+- Pocahontas (1995) - Rating: 5.0
+
+  Genre: Animation|Children|Drama|Musical|Romance
 
 ## Evaluation
 Model sistem rekomendasi dievaluasi berdasarkan pendekatan yang digunakan:
