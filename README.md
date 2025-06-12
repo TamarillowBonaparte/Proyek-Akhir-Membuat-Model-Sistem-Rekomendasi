@@ -271,22 +271,33 @@ Model sistem rekomendasi dievaluasi berdasarkan pendekatan yang digunakan:
 ---
 
 ### 🔹 1. Content-Based Filtering
+Model Content-Based Filtering menghasilkan rekomendasi berdasarkan kemiripan konten (genre film). Untuk menilai performanya, dilakukan evaluasi menggunakan metrik Precision@K dan Recall@K, yang mengukur kualitas dari top-K rekomendasi.
 
-Model ini memberikan rekomendasi berdasarkan kesamaan konten (genre), bukan memprediksi rating. Oleh karena itu, metrik evaluasi numerik seperti MAE atau MSE tidak relevan.
+📐 Metrik Evaluasi yang Digunakan:
+Precision@K: Mengukur proporsi dari rekomendasi (top-K) yang benar-benar relevan dengan preferensi pengguna.
 
-Sebagai gantinya, evaluasi dilakukan menggunakan pendekatan berbasis ranking, yaitu:
+Recall@K: Mengukur proporsi item relevan yang berhasil direkomendasikan dari seluruh item relevan yang tersedia.
 
-- **Precision@K**: Mengukur proporsi item relevan di antara K rekomendasi teratas.
-- **Recall@K**: Mengukur seberapa banyak item relevan yang berhasil direkomendasikan dari total item relevan.
+📊 Implementasi Evaluasi:
+Karena dataset MovieLens tidak menyediakan ground truth eksplisit untuk top-N rekomendasi, maka dibuat pendekatan sederhana:
 
-> **Catatan**: Karena tidak ada ground truth eksplisit dalam dataset MovieLens untuk relevansi top-N, evaluasi dilakukan secara manual. Misalnya, untuk film *Toy Story (1995)*, model merekomendasikan film animasi anak-anak lain seperti:
->
-> 1. **Antz (1998)**  
-> 2. **Toy Story 2 (1999)**  
-> 3. **Adventures of Rocky and Bullwinkle, The (2000)**
+Beberapa pengguna disimulasikan dengan daftar film yang mereka sukai (riwayat disukai).
 
-Rekomendasi ini dianggap relevan berdasarkan genre dan konteks.
+Diambil satu film sebagai query.
 
+Sisa film dalam riwayat digunakan sebagai ground truth relevansi.
+
+Sistem kemudian memberikan rekomendasi berdasarkan film query, dan dihitung berapa banyak dari rekomendasi tersebut yang terdapat dalam ground truth.
+
+📈 Hasil Evaluasi:
+User ID	Film Query	Film Relevan (Ground Truth)	
+1	Toy Story (1995)	Toy Story 2 (1999), Antz (1998)	
+2	Jumanji (1995)	Casper (1995), Flubber (1997)
+
+Rata-rata Precision@3: 0.3333
+Rata-rata Recall@3: 0.5000
+
+Evaluasi ini menunjukkan bahwa model CBF dapat memberikan rekomendasi yang relevan terhadap film-film yang disukai pengguna, terutama jika genre-nya sangat mirip. Meskipun simulasi ini terbatas dan manual, ia memberikan gambaran bahwa model mampu mengenali hubungan antar film dengan baik.
 ---
 
 ### 🔹 2. Collaborative Filtering (Neural Network)
