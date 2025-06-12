@@ -256,14 +256,14 @@ Input: userId, movieId
 Embedding: 50 dimensi
 Output: Prediksi rating (0–5)
 
-👤 Sample User: 448
+👤 Sample User: 234
 🌟 User's Top Rated Movies:
    • Toy Story (1995) - Rating: 5.0
      Genre: Adventure|Animation|Children|Comedy|Fantasy
-   • Casino (1995) - Rating: 5.0
-     Genre: Crime|Drama
-   • Star Wars: Episode IV - A New Hope (1977) - Rating: 5.0
-     Genre: Action|Adventure|Sci-Fi
+   • Powder (1995) - Rating: 5.0
+     Genre: Drama|Sci-Fi
+   • Pocahontas (1995) - Rating: 5.0
+     Genre: Animation|Children|Drama|Musical|Romance
 
 ## Evaluation
 Model sistem rekomendasi dievaluasi berdasarkan pendekatan yang digunakan:
@@ -312,8 +312,8 @@ Model ini memprediksi rating pengguna terhadap film menggunakan pendekatan Neura
 
 | Metrik       | Training Set | Validation Set |
 |--------------|--------------|----------------|
-| MAE          | **0.0416**   | **0.1650**     |
-| MSE          | **0.0035**   | **0.0461**     |
+| MAE          | **0.0454**   | **0.1615**     |
+| MSE          | **0.0042**   | **0.0443**     |
 
 Model menunjukkan performa yang baik dan **tidak mengalami overfitting**, sebagaimana terlihat pada grafik evaluasi per epoch. MAE dan MSE pada data validasi masih berada dalam batas yang wajar.
 
